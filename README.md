@@ -1,7 +1,7 @@
-#RSA algoritmi
+## RSA Algoritmi
 
-Dokumentaatio:
+Dokumentaatio:\
 [Määrittelydokumentti](./dokumentaatio/Määrittelydokumentti.md)
 
-Viikkoraportit:
+Viikkoraportit:\
 [Viikkoraportti 1](./dokumentaatio/Viikkoraportti1.md)
