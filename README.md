@@ -1,5 +1,5 @@
 ## RSA Algoritmi
-RSA Algoritmin toteutus Pythonilla.
+RSA Algoritmin toteutus Pythonilla Helsingin Yliopiston Tietorakenteet ja Algoritmit harjoitustyökurssia varten.
 
 Dokumentaatio:\
 [Määrittelydokumentti](./dokumentaatio/Määrittelydokumentti.md)
