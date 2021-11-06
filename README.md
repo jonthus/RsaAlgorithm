@@ -1,4 +1,5 @@
 ## RSA Algoritmi
+RSA Algoritmin toteutus Pythonilla.
 
 Dokumentaatio:\
 [Määrittelydokumentti](./dokumentaatio/Määrittelydokumentti.md)
