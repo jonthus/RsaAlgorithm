@@ -1,60 +1,82 @@
 import random
-import unittest
 
-class Primes():
+class Primes:
+    """
+    Luokka, jonka avulla generoidaan alkulukuja.
+
+    Attributes:
+        prime: Generoitu luku.
+    """
+
+    def __init__(self):
+        self.prime = 0
 
     def PrimeGeneration(self, length=1024):
         """
-        Generating a candidate prime number.
+        Generoidaan pariton alkuluvun kandidaatti (prime candidate).
 
-        :arg:
-        length -- int -- length of the prime in bits
+        Args:
+            length: alkuluvun pituus bitteinä
 
-        :return:
-        A possible prime number.
+        Returns:
+            Pariton alkuluku testattavaksi.
         """
-        p = random.getrandbits(length)
-        p |= (1 << length - 1) | 1
+        self.prime = random.getrandbits(length)
+        self.prime |= (1 << length - 1) | 1
+        return self.prime
 
-        return p
-
-    def CheckPrime(self, n, k=128):
+    #def Miller_Rabin(self, n, k):
         """
-        Checking if given number is a prime using
-        the Miller-Rabin primality test.
+        Tarkistetaan, onko annettu luku alkuluku käyttäen
+        Miller-Rabin -testiä.
 
-        :arg:
+        Args:
+            n: pariton luku, jonka primaalisuus testataan.
+            k: parametri, joka vaikuttaa testin tarkkuuteen.
 
-        :return:
-        False means n is not a prime.
-        True means n is a prime.
+        Returns:
+            True: luku on alkuluku suurella mahdollisuudella.
+            False: luku ei varmasti ole alkuluku.
         """
-        if n!=int(n):
+        """
+        Pseudocode:
+        Input: n > 3, an odd integer to be tested for primality;
+        Input: k, a parameter that determines the accuracy of the test
+        Output: composite if n is composite, otherwise probably prime
+        write n − 1 as 2s·d with d odd by factoring powers of 2 from n − 1
+        LOOP: repeat k times:
+           pick a randomly in the range [2, n − 2]
+           x ← ad mod n
+           if x  = 1 or x = n − 1 then do next LOOP
+           for r = 1 .. s − 1
+              x ← x2 mod n
+              if x = 1 then return composite
+              if x = n − 1 then do next LOOP
+           return composite
+        return probably prime
+        """
+#TODO: Miller-Rabin -testaamisen toteuttaminen.
+
+    def CheckPrimality(self, prime):
+        """
+        Alkuluvun tarkistaminen hitaalla tavalla. Vertailukohta Miller-Rabin-testiä varten.
+
+        Args:
+            prime: Luku, joka tarkistetaan.
+
+        Returns:
+            True: jos luku on alkuluku.
+            False: jos luku ei ole alkuluku.
+        """
+#TODO: Korjaa primaalisuuden testi sopivammaksi isoimmille luvuille. Alla oleva implementaatio on liian hidas.
+
+        if prime <= 3:
+            return prime > 1  # False
+        if prime % 2 == 0 or prime % 3 == 0:
             return False
-        n = int(n)
-        s = 0
-        d = n-1
-        while d%2==0:
-            d>>=1
-            s+=1
-        assert(2**s * d == n-1)
-
-        for i in range(8):
-            a = random.randrange(2, n)
-            if Primes.trial_composite(a, d, n, s):
+        i = 5
+        while i ** 2 <= prime:
+            if prime % i == 0 or prime % (i + 2) == 0:
                 return False
+            i += 6
         return True
-
-    def trial_composite(a, d, n, s):
-        if pow(a, d, n) == 1:
-            return False
-        for i in range(s):
-            if pow(a, 2**i * d, n) == n-1:
-                return False
-        return True
-
-if __name__ == "__main__":
-    p = Primes()
-    prime = p.PrimeGeneration()
-    print(prime)
-    print(p.CheckPrime(prime))
