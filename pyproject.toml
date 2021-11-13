@@ -12,6 +12,7 @@ cowsay = "^4.0"
 pytest = "^6.2.5"
 pylint = "^2.11.1"
 autopep8 = "^1.6.0"
+coverage = "^6.1.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
