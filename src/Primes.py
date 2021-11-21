@@ -8,9 +8,6 @@ class Primes:
         prime: Generoitu luku.
     """
 
-    def __init__(self):
-        self.prime = 0
-
     def PrimeGeneration(self, length=1024):
         """
         Generoidaan pariton alkuluvun kandidaatti (prime candidate).
@@ -21,11 +18,44 @@ class Primes:
         Returns:
             Pariton alkuluku testattavaksi.
         """
-        self.prime = random.getrandbits(length)
-        self.prime |= (1 << length - 1) | 1
-        return self.prime
+        number = random.getrandbits(length)
+        primes = []
+        k = 1
+        while k > 0:
+            if Primes.Miller_Rabin(self, number, k):
+                primes.append(number)
+                k -= 1
+                print(number)
+            number += 1
+        return number
 
-    #def Miller_Rabin(self, n, k):
+    def Witness(self, a, n):
+        """
+        Witness-funktio Miller-Rabin testiä varten.
+        Funktio palauttaa True, jos parametrin a avulla voidaan laskea, että n ei ole alkuluku.
+        Jos palautetaan False, on n suurella todennäköisyydellä alkuluku.
+
+        Args:
+            a: satunnaisesti arvottu luku
+            n: tutkittava mahdollinen alkuluku
+
+        Returns:
+            True: jos n ei ole varmasti alkuluku.
+            False: jos suurella todennäköisyydellä alkuluku.
+        """
+        remainder = 1
+        for y in range(n - 1):
+            x = remainder
+            remainder = (remainder * remainder) % n
+            if remainder == 1 and x != 1 and x != n - 1:
+                return True
+            if y == 1:
+                remainder = (remainder * a) % n
+        if remainder != 1:
+            return True
+        return False
+
+    def Miller_Rabin(self, n, k=6):
         """
         Tarkistetaan, onko annettu luku alkuluku käyttäen
         Miller-Rabin -testiä.
@@ -38,24 +68,14 @@ class Primes:
             True: luku on alkuluku suurella mahdollisuudella.
             False: luku ei varmasti ole alkuluku.
         """
-        """
-        Pseudocode:
-        Input: n > 3, an odd integer to be tested for primality;
-        Input: k, a parameter that determines the accuracy of the test
-        Output: composite if n is composite, otherwise probably prime
-        write n − 1 as 2s·d with d odd by factoring powers of 2 from n − 1
-        LOOP: repeat k times:
-           pick a randomly in the range [2, n − 2]
-           x ← ad mod n
-           if x  = 1 or x = n − 1 then do next LOOP
-           for r = 1 .. s − 1
-              x ← x2 mod n
-              if x = 1 then return composite
-              if x = n − 1 then do next LOOP
-           return composite
-        return probably prime
-        """
-#TODO: Miller-Rabin -testaamisen toteuttaminen.
+        if n < 2:
+            return False
+        for i in range(k):
+            if Primes.Witness(self, random.randint(1, n - 1), n):
+                return False
+        return True
+
+#TODO: Miller-Rabin -testaamisen nopeuttaminen.
 
     def CheckPrimality(self, prime):
         """
@@ -80,3 +100,9 @@ class Primes:
                 return False
             i += 6
         return True
+
+if __name__ == "__main__":
+    initiation = Primes()
+    #prime = initiation.PrimeGeneration()
+    prime = 2
+    print(initiation.Miller_Rabin(prime, k=6))

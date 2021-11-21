@@ -8,9 +8,27 @@ class TestPrimes(unittest.TestCase):
         self.init = Primes.Primes()
         self.prime = self.init.PrimeGeneration()
 
+    def test_Miller_Rabin(self):
+        """
+        Luokan Primes testaamista.
+        Testaa Miller-Rabin testin toimintaa.
+
+        Args:
+            None
+
+        Returns:
+            assertEqual: onko testin tulos sama
+        """
+        prime = 5
+        ans = self.init.Miller_Rabin(prime, k=6)
+        self.assertEqual(ans, True)
+
+    def test_Witness(self):
+        return 0
+
     def test_PrimeGeneration(self):
         """
-        Testiluokan TestPrimes testaamista.
+        Luokan Primes testaamista.
         Testaa ovatko generoidut alkuluvut saman pituisia.
 
         Args:
