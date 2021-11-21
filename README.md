@@ -5,5 +5,9 @@ Dokumentaatio:\
 [Määrittelydokumentti](./dokumentaatio/Määrittelydokumentti.md)
 
 Viikkoraportit:\
-[Viikkoraportti 1](./dokumentaatio/Viikkoraportti1.md)
-[Viikkoraportti 2](./dokumentaatio/Viikkoraportti2.md)
+[Viikkoraportti 1](./dokumentaatio/Viikkoraportti1.md)  
+[Viikkoraportti 2](./dokumentaatio/Viikkoraportti2.md)  
+[Viikkoraportti 3](./dokumentaatio/Viikkoraportti3.md)  
+
+Testikattavuus:  
+![coverage](./dokumentaatio/coverage.png)
