@@ -3,7 +3,8 @@
 Ohjelman toiminnan oikeellisuus on tällä hetkellä alkulukujen generoiminen, ja koko sovelluksen oikeellisuus on RSA Algoritmilla
 viestin enkryptio ja dekryptio. Olennaista on alkulukujen generoiminen nopeasti, ja sitä voidaan testata monella tavalla.
 
-Kattavuusraportti
+![coverage](./coverage_viikko_4.png)
+
 
 Jokaista funktiota on testattu erikseen testikattavuuden saavuttamiseksi.
 Miller-Rabin-testiä testattiin 2^1024 bitin alkuluvulla.
