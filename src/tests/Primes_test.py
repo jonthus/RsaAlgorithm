@@ -1,4 +1,3 @@
-import random
 import unittest
 from .. import Primes
 
@@ -6,9 +5,37 @@ class TestPrimes(unittest.TestCase):
 
     def setUp(self):
         self.init = Primes.Primes()
-        self.prime = self.init.PrimeGeneration()
+        self.prime = self.init.primeGeneration(1024)
+        self.lowPrimesList = self.init.lowPrimes()
 
-    def test_Miller_Rabin(self):
+    def test_main(self):
+        """
+        Luokan main testaamista.
+        Testaa luokan Primes ajamista.
+
+        Args:
+            None
+
+        Returns:
+            assertEqual: onko tulos sama
+        """
+        value = self.init.checkPrimality(self.prime)
+        self.assertEqual(value, True)
+
+    def test_lowPrimes(self):
+        """
+        Luokan lowPrimes testaamista.
+        Testaa pienten alkulukujen generoimista.
+
+        Args:
+            None
+
+        Returns:
+            assertEqual: generoiko lista oikein
+        """
+        self.assertEqual(len(self.lowPrimesList), 168)
+
+    def test_millerRabin(self):
         """
         Luokan Primes testaamista.
         Testaa Miller-Rabin testin toimintaa.
@@ -19,43 +46,33 @@ class TestPrimes(unittest.TestCase):
         Returns:
             assertEqual: onko testin tulos sama
         """
-        prime = 5
-        ans = self.init.Miller_Rabin(prime, k=6)
-        self.assertEqual(ans, True)
+        value = self.init.millerRabin(self.prime, k=6)
+        self.assertEqual(value, True)
 
-    def test_Witness(self):
-        return 0
-
-    def test_PrimeGeneration(self):
+    def test_checkPrimality(self):
         """
-        Luokan Primes testaamista.
+        Luokan checkPrimality testaamista.
+        Testaa alkuluvut
+
+        Args:
+            None
+
+        Returns:
+            assertEqual: onko testin tulos sama
+        """
+        value = self.init.checkPrimality(self.prime)
+        self.assertEqual(value, True)
+
+    def test_primeGeneration(self):
+        """
+        Luokan primeGeneration testaamista.
         Testaa ovatko generoidut alkuluvut saman pituisia.
 
         Args:
-            none
+            None
 
         Returns:
             assertEqual: ovatko pituudet samat
         """
-
-        test_length = 1024
-        p = random.getrandbits(test_length)
-        p |= (1 << test_length - 1) | 1
-        prime_length = p.bit_length()
-        self.assertEqual(prime_length, test_length)
-
-    def test_CheckPrimality(self):
-        test_value = False
-        #ensimmäinen False
-        prime = 1
-        value = self.init.CheckPrimality(prime)
-        self.assertEqual(value, test_value)
-
-        test_value = True
-        #viimeinen True
-        prime = 17
-        value = self.init.CheckPrimality(prime)
-        self.assertEqual(value, test_value)
-
-    #TODO: korjaa ylläoleva hitaampi primaalisuuden tarkistaminen
-    #TODO: Miller-Rabinin toiminnan testaaminen.
+        value = self.init.primeGeneration(1024)
+        self.assertEqual(value.bit_length() > 1000, True)
