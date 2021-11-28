@@ -2,107 +2,103 @@ import random
 
 class Primes:
     """
-    Luokka, jonka avulla generoidaan alkulukuja.
-
-    Attributes:
-        prime: Generoitu luku.
+    Luokka, jonka avulla generoidaan suuria alkulukuja.
     """
 
-    def PrimeGeneration(self, length=1024):
+    def __init__(self):
+        self.lowPrimeList = Primes.lowPrimes(self)
+
+    def lowPrimes(self):
         """
-        Generoidaan pariton alkuluvun kandidaatti (prime candidate).
+        Luo listan alkuluvuista väliltä 2 ja 1000.
 
         Args:
-            length: alkuluvun pituus bitteinä
+            None
 
         Returns:
-            Pariton alkuluku testattavaksi.
+            lowprimes: lista alkuluvuista väliltä 2 ja 1000.
         """
-        number = random.getrandbits(length)
-        primes = []
-        k = 1
-        while k > 0:
-            if Primes.Miller_Rabin(self, number, k):
-                primes.append(number)
-                k -= 1
-                print(number)
-            number += 1
-        return number
+        lowprimes = []
+        for i in range(2, 1000):
+            if i > 1:
+                for j in range (2, i):
+                    if i % j == 0:
+                        break
+                else:
+                    lowprimes.append(i)
+        return lowprimes
 
-    def Witness(self, a, n):
-        """
-        Witness-funktio Miller-Rabin testiä varten.
-        Funktio palauttaa True, jos parametrin a avulla voidaan laskea, että n ei ole alkuluku.
-        Jos palautetaan False, on n suurella todennäköisyydellä alkuluku.
-
-        Args:
-            a: satunnaisesti arvottu luku
-            n: tutkittava mahdollinen alkuluku
-
-        Returns:
-            True: jos n ei ole varmasti alkuluku.
-            False: jos suurella todennäköisyydellä alkuluku.
-        """
-        remainder = 1
-        for y in range(n - 1):
-            x = remainder
-            remainder = (remainder * remainder) % n
-            if remainder == 1 and x != 1 and x != n - 1:
-                return True
-            if y == 1:
-                remainder = (remainder * a) % n
-        if remainder != 1:
-            return True
-        return False
-
-    def Miller_Rabin(self, n, k=6):
+    def millerRabin(self, n, k=6):
         """
         Tarkistetaan, onko annettu luku alkuluku käyttäen
         Miller-Rabin -testiä.
 
         Args:
+            p: potentiaalinen alkuluku, jonka primaalisuus testataan.
+            k: testikierrosten määrä, joka vaikuttaa tarkkuuteen.
+
+        Returns:
+            True: luku on alkuluku suurella todennäköisyydellä.
+            False: luku ei varmasti ole alkuluku.
+        """
+
+        d = n - 1
+        t = 0
+
+        while d % 2 == 0:  # jaetaan d tekijöihin jakamalla sitä kahdella
+            d = d // 2
+            t += 1
+
+        for _ in range(k):
+            a = random.randrange(2, n - 2)  # valitaan randomisoitu numero väliltä (2, n-2)
+            x = pow(a, d, n)  # x = (a**d)%n
+            if x != 1:
+                i = 0
+                while x != (n - 1):
+                    if i == t - 1:
+                        return False
+                    else:
+                        i = i + 1
+                        x = pow(x, 2, n)  # x = (x**2)%n
+        return True
+
+    def checkPrimality(self, n):
+        """
+        Tarkistetaan ensin laskutoimituksen "n modulo alkuluku" avulla, jonka avulla voidaan
+        poistaa suuri määrä epäalkulukuja ennen Miller-Rabinin suorittamista.
+
+        Args:
             n: pariton luku, jonka primaalisuus testataan.
-            k: parametri, joka vaikuttaa testin tarkkuuteen.
 
         Returns:
             True: luku on alkuluku suurella mahdollisuudella.
             False: luku ei varmasti ole alkuluku.
         """
-        if n < 2:
-            return False
-        for i in range(k):
-            if Primes.Witness(self, random.randint(1, n - 1), n):
+
+        for prime in self.lowPrimeList:  # tarkistetaan, onko alkulukukandidaatin ja alkuvun jakojäännös 0
+            if n % prime == 0:
                 return False
-        return True
 
-#TODO: Miller-Rabin -testaamisen nopeuttaminen.
+        return Primes.millerRabin(self, n)
 
-    def CheckPrimality(self, prime):
+    def primeGeneration(self, size):
         """
-        Alkuluvun tarkistaminen hitaalla tavalla. Vertailukohta Miller-Rabin-testiä varten.
+        Generoidaan luku ja tarkistetaan, onko se alkuluku.
 
         Args:
-            prime: Luku, joka tarkistetaan.
+            size: haluttu alkuluvun koko bitteinä.
 
         Returns:
-            True: jos luku on alkuluku.
-            False: jos luku ei ole alkuluku.
+            n: Miller-Rabin testillä tarkistettu alkuluku
         """
-#TODO: Korjaa primaalisuuden testi sopivammaksi isoimmille luvuille. Alla oleva implementaatio on liian hidas.
-
-        if prime <= 3:
-            return prime > 1  # False
-        if prime % 2 == 0 or prime % 3 == 0:
-            return False
-        i = 5
-        while i ** 2 <= prime:
-            if prime % i == 0 or prime % (i + 2) == 0:
-                return False
-            i += 6
-        return True
+        while True:
+            n = random.getrandbits(1024)
+            if Primes.checkPrimality(self, n):
+                return n
 
 if __name__ == "__main__":
-    initiation = Primes()
-    #prime = initiation.PrimeGeneration()
-    prime = 2
-    print(initiation.Miller_Rabin(prime, k=6))
+    init = Primes()
+    size = 1024
+    n = init.primeGeneration(1024)
+    print("Prime number: ", n)
+    print("Primality check: ", init.checkPrimality(n))
