@@ -1,5 +1,4 @@
-  GNU nano 4.8                   Viikkoraportti3.md                             
-Viikkoraportti 4:
+### Viikkoraportti 4:
 
 Ajankäyttö: noin 10 tuntia
 Tällä viikolla tein valmiiksi Miller-Rabin-testin pääosuuden alkulukujen generointia varten. 
