@@ -1,71 +1,49 @@
+
 import Primes
-import math
-import random
 
-def euclidean_gcd(e, phi):
+def generateKeys(p, q):
     """
-    Funktio, jonka avulla lasketaan Euclidean GCD.
+    Funktio, generoi avaimet Primes-luokan ja RSA-algoritmin mukaisten laskutoimitusten perusteella.
     Args:
-
+        p, q tai None, None
     Returns:
-
+        e: public key
+        d: private key
+        n: eksponentti
     """
-    while phi:
-        e, phi = phi, e % phi
-    return e
-
-def modular_inverse(e, phi):
-    """
-    Funktio, jonka avulla lasketaan Modular inverse.
-    Args:
-
-    Returns:
-
-    """
-    for i in range(1, phi):
-        if e * i % phi == 1:
-            return i
-    return False
-
-def calculate_rsa(p, q):
-    """
-    Funktio, jonka avulla lasketaan RSA enkryptiota varten tarvittavat termit.
-    Args:
-
-    Returns:
-
-    """
-    n = p*q
-    phi = (p-1) * (q-1)
-    while True:
-        e = random.randrange(1, phi)
-        gcd = euclidean_gcd(e, phi)
-        d = modular_inverse(e, phi)
-        if gcd == 1:
-            break
+    e = 65537
+    n = p * q
+    phi = (p-1)*(q-1)
+    d = pow(e, -1, phi)
     return e, d, n
 
-def encryption(e, d, n):
+
+def encryption(message, e, n):
     """
     Funktio, joka enkryptoi selkokielisen viestin.
     Args:
-
+        message: selkokielinen viesti
+        e: public key
+        n: eksponentti
     Returns:
-
+        res: enkryptoitu viesti
     """
-    return 0
+    res = [pow(ord(c), e, n) for c in message]
+    return res
 
-def decryption():
+
+def decryption(cipher, d, n):
     """
-    Funktio, joka dekryptoi selkokielisen viestin.
+    Funktio, joka dekryptoi salatun viestin.
     Args:
-
+        cipher: enkryptoitu viesti
+        d: private key
+        n: eksponentti
     Returns:
-
+        res: selkokielinen viesti
     """
-    return 0
+    res = [chr(pow(c, d, n)) for c in cipher]
+    return ''.join(res)
 
 
-if __name__ == "__main__":
-    ans = calculate_rsa(5, 13)
-    print(ans)
+# EOF

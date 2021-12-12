@@ -96,9 +96,5 @@ class Primes:
             if Primes.checkPrimality(self, n):
                 return n
 
-if __name__ == "__main__":
-    init = Primes()
-    size = 1024
-    n = init.primeGeneration(1024)
-    print("Prime number: ", n)
-    print("Primality check: ", init.checkPrimality(n))
+
+# EOF

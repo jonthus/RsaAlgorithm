@@ -46,7 +46,8 @@ class TestPrimes(unittest.TestCase):
         Returns:
             assertEqual: onko testin tulos sama
         """
-        value = self.init.millerRabin(self.prime, k=6)
+        prime = 5
+        value = self.init.millerRabin(5, k=6)
         self.assertEqual(value, True)
 
     def test_checkPrimality(self):
@@ -76,3 +77,5 @@ class TestPrimes(unittest.TestCase):
         """
         value = self.init.primeGeneration(1024)
         self.assertEqual(value.bit_length() > 1000, True)
+
+# EOF
