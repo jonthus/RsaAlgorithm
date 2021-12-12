@@ -3,7 +3,7 @@
 Ohjelman toiminnan oikeellisuus on tällä hetkellä alkulukujen generoiminen, ja koko sovelluksen oikeellisuus on RSA Algoritmilla
 viestin enkryptio ja dekryptio. Olennaista on alkulukujen generoiminen nopeasti, ja sitä voidaan testata monella tavalla.
 
-![coverage](./coverage_viikko_4.png)
+![coverage](./coverage_viikko_6.png)
 
 
 Jokaista funktiota on testattu erikseen testikattavuuden saavuttamiseksi.
