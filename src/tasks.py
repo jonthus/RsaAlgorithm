@@ -6,15 +6,15 @@ def foo(ctx):
 
 @task
 def start(ctx):
-    ctx.run("python3 src/Primes.py")
+    ctx.run("python3 ui/gui.py")
 
 @task
 def test(ctx):
-    ctx.run("pytest src")
+    ctx.run("pytest .")
 
 @task
 def coverage(ctx):
-    ctx.run("coverage run --branch -m pytest src")
+    ctx.run("coverage run --branch -m pytest .")
 
 @task(coverage)
 def coverage_report(ctx):
