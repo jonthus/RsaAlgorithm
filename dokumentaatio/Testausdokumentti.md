@@ -63,7 +63,3 @@ Esimerkkinä alla on 10 merkin pituisella merkkijonolla 1024 bitin pituisella al
 | 10 merkkiä | 0,2100 s |
 | 100 merkkiä | 2,2871 s |
 | 1000 merkkiä | 24,5920 s |
-
-### Parannusehdotuksia
-Alkulukujen generoinnin aikavaativuudessa on suuria heittelyitä 1024-bittisistä alkuluvuista eteenpäin, johtuen todennäköisesti `millerRabin` -metodin implementaatiosta. Tämä on huomattavissa tapauksissa, jossa se joutuu käymään kaikki 40 testikierrosta läpi, ennen kuin se löytää alkuluvun.
-
