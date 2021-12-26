@@ -39,4 +39,5 @@ class TestRSA(unittest.TestCase):
         answer = RSA.decryption(cipher, d, n)
         self.assertEqual(answer, correct)
 
+
 # EOF

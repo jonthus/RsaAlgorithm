@@ -9,15 +9,24 @@ import RSA
 class GUI:
 
     def __init__(self):
+        """
+        Generoi alkuluvut ja RSA:n laskemiseen tarvittavat parametrit.
+        """
         self.init = Primes.Primes()
         self.p = self.init.primeGeneration(1024)
         self.q = self.init.primeGeneration(1024)
         self.e, self.d, self.n = RSA.generateKeys(self.p, self.q)
 
     def getValues(self):
+        """
+        Palauttaa primeGeneration ja generateKeys -metodien luomat luvut.
+        """
         return self.e, self.d, self.n
 
     def run(self):
+        """
+        Käynnistää ohjelman ja käyttöliittymän.
+        """
         self.root = tk.Tk()
         self.root.title('RSA-salaus')
 
@@ -47,23 +56,31 @@ class GUI:
 
         self.show2 = tk.Label(master=self.root,text='Dekryptoitu teksti:')
         self.show2.pack()
+
         self.listbox2 = tk.Listbox(master=self.root, height=10, width=200)
         self.listbox2.pack()
 
         self.root.mainloop()
 
     def _encrypt(self):
-        e, d, n = init.getValues()
+        """
+        Enkryptoi selkokielisen viestin ja tulostaa sen käyttöliittymään.
+        """
+        e, d, n = self.getValues()
         plaintext = self.value1.get()
         enc = RSA.encryption(plaintext, e, n)
-        self.listbox.insert(0, enc)
+        self.listbox.insert(tk.END, enc)
 
     def _decrypt(self):
-        e, d, n = init.getValues()
+        """
+        Dekryptoi salatun viestin ja tulostaa sen käyttöliittymään.
+        """
+        e, d, n = self.getValues()
         plaintext = self.value1.get()
         ciphertext = RSA.encryption(plaintext, e, n)
         dec = RSA.decryption(ciphertext, d, n)
-        self.listbox2.insert(0, dec)
+        self.listbox2.insert(tk.END, dec)
+
 
 if __name__ == '__main__':
     init = GUI()

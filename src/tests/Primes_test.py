@@ -50,7 +50,7 @@ class TestPrimes(unittest.TestCase):
             assertEqual: onko testin tulos sama
         """
         prime = 5
-        value = self.init.millerRabin(5, k=6)
+        value = self.init.millerRabin(5, k=40)
         self.assertEqual(value, True)
 
     def test_checkPrimality(self):

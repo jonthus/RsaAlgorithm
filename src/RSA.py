@@ -1,15 +1,16 @@
 
-import Primes
+import time
+
 
 def generateKeys(p, q):
     """
-    Funktio, generoi avaimet Primes-luokan ja RSA-algoritmin mukaisten laskutoimitusten perusteella.
+    Funktio, joka generoi avaimet Primes-luokan ja RSA-algoritmin laskutoimituksilla.
     Args:
         p, q tai None, None
     Returns:
         e: public key
         d: private key
-        n: eksponentti
+        n: toinen puoli avainta
     """
     e = 65537
     n = p * q
@@ -24,7 +25,7 @@ def encryption(message, e, n):
     Args:
         message: selkokielinen viesti
         e: public key
-        n: eksponentti
+        n: toinen puoli avainta
     Returns:
         res: enkryptoitu viesti
     """
@@ -38,7 +39,7 @@ def decryption(cipher, d, n):
     Args:
         cipher: enkryptoitu viesti
         d: private key
-        n: eksponentti
+        n: toinen puoli avainta
     Returns:
         res: selkokielinen viesti
     """
@@ -47,3 +48,4 @@ def decryption(cipher, d, n):
 
 
 # EOF
+
