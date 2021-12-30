@@ -15,7 +15,7 @@ Ohjelman suoritus ja asennus tapahtuu `src`-kansiossa.
     Varmista, että olet `src`-kansiossa!
     poetry run invoke start
 
-Ohjelma käynnistää yllä olevalla komennolla. Ohjelmaan syötetään enkryptoitavaksi haluttu merkkijono. Painamalla Enkryptoi-nappia kyseinen viesti salataan. Salattu viesti tulostetaan näytölle. Salatun viestin voi purkaa painamalla Dekryptoi-nappia. Purettu viesti tulostetaan näytölle. Ohjelma hyväksyy numero- ja tekstimuotoisia syötteitä. Huomioitavaa on kuitenkin, että ohjelman toiminta hidastuu suurilla syötteillä.  
+Ohjelma käynnistää yllä olevalla komennolla. Ohjelmaan syötetään enkryptoitavaksi haluttu merkkijono. Painamalla Enkryptoi-nappia kyseinen viesti salataan. Salattu viesti tulostetaan näytölle. Salatun viestin voi purkaa kopioimalla ja liittämällä salatun viestin tekstikenttään, ja painamalla Dekryptoi-nappia. Purettu viesti tulostetaan näytölle. Ohjelma hyväksyy numero- ja tekstimuotoisia syötteitä. Huomioitavaa on kuitenkin, että ohjelman toiminta hidastuu suurilla syötteillä.  
 
 #### Ohjelman testaus
     
