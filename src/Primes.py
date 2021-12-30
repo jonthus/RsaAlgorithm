@@ -1,6 +1,8 @@
-import random
-import time
+"""
+Moduuli, jonka avulla generoidaan alkulukuja RSA:n laskemista varten.
+"""
 
+import random
 
 class Primes:
     """

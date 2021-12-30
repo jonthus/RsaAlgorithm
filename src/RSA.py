@@ -1,6 +1,8 @@
 
-import time
 
+"""
+Moduuli, jolla generoidaan RSA:n avaimet ja suoritetaan enkryptio ja dekryptio.
+"""
 
 def generateKeys(p, q):
     """
@@ -48,4 +50,3 @@ def decryption(cipher, d, n):
 
 
 # EOF
-
