@@ -40,7 +40,7 @@ Ohjelma koostuu yhdestä luokasta, jossa on 4 metodia alkulukujen generointiin, 
 
 #### Pseudokoodi
 
-Jos kumpikaan seuraavista ehdoista tosi, niin n on todennäköisesti alkuluku, todennäköisyys?:  
+Jos kumpikaan seuraavista ehdoista tosi, niin n on todennäköisesti alkuluku:  
   - a^d*2^r on kongruentti -1 (mod n), kun 0 < r < s  
   - a^d on kongruentti 1 (mod n)
 Muutoin luku on jaollinen luku.
@@ -48,7 +48,9 @@ Muutoin luku on jaollinen luku.
 Alla oleva pseudokoodi on omaan työhön sovellettu versio Wikipedian Miller-Rabin -testin pseudokoodista.  
 Koodin syötteeksi oletetaan:
   - n: 1024-bittinen generoitu luku, josta testataan, onko se alkuluku.
-  - k: testikierrosten määrä, joka vaikuttaa testin tarkkuuteen.
+  - k: testikierrosten määrä, joka vaikuttaa testin tarkkuuteen.  
+       Miller-Rabin testin tarkkuus luvulle n on noin 4^-k, eli se on 
+       4^-k todennäköisyydellä mahdollisesti alkuluku.
 ```
 write n as 2^r·d + 1 with d odd (by factoring out powers of 2 from n − 1)
 
